@@ -40,8 +40,6 @@ In addition to that, check the pyproject.toml file to see how the marks are adde
 - first do `make compose`
 - then check with `docker ps` the healthcheck
 - test the api with [http://localhost:8000/docs](http://localhost:8000/docs)
-
-
 # Build your own tests
 Now, add tests to `straattaal` from lesson 2
 
