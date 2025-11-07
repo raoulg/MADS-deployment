@@ -44,3 +44,16 @@ it is reasonable to omit the requirements file and
 simply do eg. `RUN pip install --no-cache-dir pandas` to install just pandas.
 
 I provided an example Makefile, for this structure, to show you how to mount volumes with the `-v` flag
+
+## Docker Compose
+Managing many docker images can become messy very quickly. That's why there is docker compose.
+In a single file, you can reference your different docker images and configure them. Then with a single command you can
+build and run all those images.
+
+It can do a lot more, like connecting the containers through a network and starting only a subset of images.
+
+Based on the [docker-compose.yml](docker-compose.yml), add the three dockerfiles, build and run them.
+
+```bash
+docker-compose -f docker-compose.yml up --build
+```
