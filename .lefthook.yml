@@ -14,7 +14,7 @@ pre-commit:
     clean-jupyter:
       files: git ls-files
       glob: '*.ipynb'
-      run: rye run jupyter nbconvert --clear-output --inplace {staged_files}
+      run: uv run jupyter nbconvert --clear-output --inplace {staged_files}
       stage_fixed: true
     pyright:
       glob: '*.py'
