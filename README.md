@@ -19,3 +19,8 @@ On macOS and Linux you can use:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 For other options, please check the [uv installation instructions](https://docs.astral.sh/uv/getting-started/installation/)
+
+## Preparation and exercises
+There is a separate document for each of the three workshops, [1](./1-docker/README.md), [2](./2-frontend/README.md), [3](./3-testing/README.md).
+
+The first exercise requires preparation, detailed in the document.
