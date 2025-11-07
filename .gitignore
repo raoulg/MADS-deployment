@@ -12,3 +12,5 @@ wheels/
 **/data/processed/
 lesson-1/img/*
 lesson-1/html-minimal/img/*
+
+.lycheecache
