@@ -11,6 +11,7 @@ dependencies = [
     "tokenizers>=0.19.1",
     "torch>=2.0",
     "matplotlib>=3.9.2",
+    "requests>=2.32.5",
 ]
 readme = "README.md"
 requires-python = ">= 3.10"
