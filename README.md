@@ -8,8 +8,8 @@ Please go to the [docker website](https://docs.docker.com) to check how you can 
 
 For a ubuntu system like the VMs we use, you can run the script:
 
-1. Create a 'Ubuntu 22.04' VM with 1 core, 8GB of RAM.
-2. Clone this repo
+1. Following [SURF setup](./presentations/00-SURF-lab-setup.pdf), create an 'Ubuntu 22.04' VM with 1 core, 8GB of RAM.
+2. Connect to the VM and clone this repo
 3. run `./install-docker.sh`
 
 ### install uv
