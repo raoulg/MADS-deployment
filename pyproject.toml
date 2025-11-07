@@ -1,7 +1,7 @@
 [project]
 name = "mads-deployment"
 version = "0.1.0"
-description = "Add your description here"
+description = "Code for the deployment classes"
 authors = [
     { name = "Raoul Grouls", email = "Raoul.Grouls@han.nl" }
 ]
@@ -15,11 +15,10 @@ dependencies = [
     "scikit-learn>=1.5.2",
 ]
 readme = "README.md"
-requires-python = ">= 3.10"
+requires-python = ">= 3.12"
 
-[tool.rye]
-managed = true
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "jupyter>=1.1.1",
     "isort>=5.13.2",
     "ruff>=0.8.0",
