@@ -2,8 +2,9 @@
 
 ## Prepare
 
-### Minimal
-First, study the [A-minimal/README.md](A-minimal/README.md) file.
+- First, study the [A-minimal/README.md](A-minimal/README.md) file and do the exercise there.
+- Second, study the [B-fastapi-minimal/README.md](B-fastapi-minimal/README.md) file and do the exercise there.
+- Finally, study the [C-html-minimal/README.md](C-html-minimal/README.md) file and do the exercise there.
 
 ### fastapi
 

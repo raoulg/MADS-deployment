@@ -57,4 +57,5 @@ clean: stop
 	@echo "$(YELLOW)Cleaning up...$(NC)"
 	-docker rm $(IMAGE_NAME) 2>/dev/null || true
 	-docker rmi $(IMAGE_NAME):$(IMAGE_TAG) 2>/dev/null || true
+	-rm -rf img
 	@echo "$(GREEN)Cleanup complete!$(NC)"
