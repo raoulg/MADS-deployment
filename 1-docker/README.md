@@ -2,7 +2,10 @@
 
 ## Prepare
 
-1. Install the dependencies using the `pyproject.toml` file.
+### Minimal
+First, study the [A-minimal/README.md](A-minimal/README.md) file.
+
+
 2. Have a look at the minimal and minimal-fastapi examples.
 3. Have a look at the notebooks, and run them.
 4. setup your own project (git, dependency management, etc, see [codestyle](https://github.com/raoulg/codestyle) for details) for the exercise

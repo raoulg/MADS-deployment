@@ -12,7 +12,7 @@ For a ubuntu system like the VMs we use, you can run the script:
 2. Connect to the VM and clone this repo
 3. run `./install-docker.sh`
 
-### install uv
+### install uv and sync the environment
 We will be using `uv`.
 On macOS and Linux you can use:
 ```bash
@@ -20,7 +20,11 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 For other options, please check the [uv installation instructions](https://docs.astral.sh/uv/getting-started/installation/)
 
-## Preparation and exercises
-There is a separate document for each of the three workshops, [1](./1-docker/README.md), [2](./2-frontend/README.md), [3](./3-testing/README.md).
+Use `uv sync` to sync the environment in the `pyproject.toml` file.
 
-The first exercise requires preparation, detailed in the document.
+
+## Preparation and exercises
+
+Start with the [README.md](./1-docker/README.md) file and follow the instructions there.
+
+
