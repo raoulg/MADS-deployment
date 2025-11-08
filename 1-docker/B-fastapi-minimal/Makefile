@@ -28,6 +28,9 @@ build:
 	@echo "$(GREEN)Build complete!$(NC)"
 
 run: build
+	@printf "%sStopping and removing existing container...%s\n" "$(YELLOW)" "$(NC)"
+	-docker stop $(IMAGE_NAME) 2>/dev/null || true
+	-docker rm $(IMAGE_NAME) 2>/dev/null || true
 	@echo "$(YELLOW)Starting container...$(NC)"
 	docker run -d -p $(PORT):$(PORT) --name $(IMAGE_NAME) $(IMAGE_NAME):$(IMAGE_TAG)
 	@echo "$(GREEN)Service running on http://localhost:$(PORT)$(NC)"
