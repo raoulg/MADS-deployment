@@ -7,7 +7,3 @@ build:
 run:
 	docker run -d -p 8000:8000 my-python-app:latest
 	@echo "running on http://localhost:8000"
-
-clean:
-	@echo "Cleaning up dangling (unused) Docker images..."
-	docker image prune -f

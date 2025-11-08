@@ -5,6 +5,10 @@
 ### Minimal
 First, study the [A-minimal/README.md](A-minimal/README.md) file.
 
+### fastapi
+
+
+
 
 2. Have a look at the minimal and minimal-fastapi examples.
 3. Have a look at the notebooks, and run them.
