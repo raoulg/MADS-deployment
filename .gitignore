@@ -10,7 +10,5 @@ wheels/
 .venv
 **/data/raw/
 **/data/processed/
-lesson-1/img/*
-lesson-1/html-minimal/img/*
 
 .lycheecache
