@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./query_data:/data
+      - ./logs/backend:/var/log
+    environment:
+      - LOGURU_COLORIZE=true
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./logs/frontend:/var/log
+    environment:
+      - LOGURU_COLORIZE=true
+    depends_on:
+      - backend
