@@ -12,3 +12,7 @@ wheels/
 **/data/processed/
 
 .lycheecache
+
+.notebookcache
+notenbookstest.log
+logs/

@@ -11,6 +11,8 @@ pre-commit:
       files: git ls-files
       glob: '*.py'
       run: ruff check {staged_files} --fix
+    notebooktester:
+      run: notebooktester 1-docker/E-exercise/notebooks -v -t 250
     clean-jupyter:
       files: git ls-files
       glob: '*.ipynb'
