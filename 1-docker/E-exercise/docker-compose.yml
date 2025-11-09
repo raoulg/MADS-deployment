@@ -2,16 +2,14 @@
 services:
   ingest:
     build:
-      context: .
-      dockerfile: ingest/ingest.Dockerfile
+      context: ./ingest
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
 
   preprocess:
     build:
-      context: .
-      dockerfile: preprocess/preprocess.Dockerfile
+      context: ./preprocess
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
@@ -20,8 +18,7 @@ services:
 
   model:
     build:
-      context: .
-      dockerfile: model/serve.Dockerfile
+      context: ./model
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
