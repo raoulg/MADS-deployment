@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from typing import Optional
 
 import requests
 import torch
@@ -8,8 +9,7 @@ from slanggen.custom_logger import logger
 from torch.nn.utils.rnn import pad_sequence
 
 
-def get_data(filename: Path) -> list[str]:
-    url = "https://www.mijnwoordenboek.nl/regio/Amsterdamse%20straattaal"
+def get_data(filename: Path, url: str) -> list[str]:
     logger.info(f"Getting data from {url}")
     # Send a GET request to the website
     response = requests.get(url)
@@ -46,14 +46,15 @@ def get_data(filename: Path) -> list[str]:
     return processed_words
 
 
-def load_data(filename: Path) -> list[str]:
+def load_data(filename: Path, url: str) -> list[str]:
     if not filename.exists():
-        processed_words = get_data(filename)
+        logger.info(f"File {filename} not found. donwloading from {url}")
+        processed_words = get_data(filename, url)
     else:
-        # load the processed words from the file
         logger.info(f"Loading processed words from {filename}")
         with open(filename, "r", encoding="utf-8") as file:
             processed_words = [line.strip() for line in file]
+    logger.info(f"Loaded {len(processed_words)} words")
     return processed_words
 
 
