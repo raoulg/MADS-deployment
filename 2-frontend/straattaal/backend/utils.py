@@ -2,7 +2,6 @@ import random
 import string
 
 import torch
-from loguru import logger
 
 
 def _generate_word(start_letter, model, tokenizer, max_length, temperature=1.0):

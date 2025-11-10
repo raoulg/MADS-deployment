@@ -7,7 +7,7 @@ from torch import nn
 
 
 def buildBPE(corpus: list[str], vocab_size: int) -> tk.Tokenizer:
-    tokenizer = tk.Tokenizer(tk.models.BPE())  # type: ignore
+    tokenizer = tk.Tokenizer(tk.models.BPE(unk_token="<unk>"))  # type: ignore
     trainer = tk.trainers.BpeTrainer(  # type: ignore
         vocab_size=vocab_size,
         min_frequency=1,
