@@ -23,10 +23,15 @@ focus on creating three dockerfiles, one for each step of the pipeline. You can 
 
 The get you started, i created a `docker-compose.yml` file that defines three services: `ingest`, `preprocess` and `model`.
 
-- create folders for every step of the process
-- for every folder, create a python file based on the notebook that implements the logic of that step
-- make sure to install the necessary dependencies for python in each container
-- create a dockerfile for each step that installs the necessary dependencies and runs the python script
+1. create folders for every step of the process
+1. for every folder, create a python file based on the notebook that implements the logic of that step
+1. make sure to isolate and install the necessary dependencies for python in each container
+1. For the model visualisation, try to make some minimal frontend (eg with streamlit) such that the user can trigger a run of the model and shows the output of the model to the user
+1. create a dockerfile for each step that installs the necessary dependencies and runs the python script
+
+Because we are doing a course on frontend development, i would suggest to either:
+A. use a very simple frontend package in python like streamlit. You can find the docs [here](https://docs.streamlit.io/)
+B. or, alternatively, if you describe what you need to a LLM (a button that triggers a function, runs the model and shows an image as the result) it should be able to generate a simple HTML page for you. Just make sure you give enough context (eg that this is part of a docker compose pipeline etc)
 
 While developing, you could use docker to test individual steps by specifying a specific dockerfile with the `-f` flag, for example:
 
