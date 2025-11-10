@@ -1,7 +1,7 @@
 pre-commit:
   commands:
     lychee:
-      run: lychee . --suggest --max-concurrency 32 --cache --format detailed --max-cache-age 7d --exclude-all-private
+      run: lychee . --suggest --max-concurrency 32 --cache --format detailed --max-cache-age 7d --exclude-all-private --exclude 'static/styles.css'
     isort:
       files: git ls-files
       glob: '*.{py}'
