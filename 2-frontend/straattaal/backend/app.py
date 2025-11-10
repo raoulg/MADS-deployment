@@ -1,4 +1,5 @@
 import json
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 import torch
@@ -13,42 +14,66 @@ from utils import sample_n
 
 logger.add("logs/app.log", rotation="5 MB")
 
-frontend_folder = Path("static").resolve()
-artefacts = Path("artefacts").resolve()
+FRONTEND_FOLDER = Path("static").resolve()
+ARTEFACTS = Path("artefacts").resolve()
+model_state = {}
 
-if not frontend_folder.exists():
-    raise FileNotFoundError(f"Cant find the frontend folder at {frontend_folder}")
-else:
-    logger.info(f"Found {frontend_folder}")
+def load_model():
+    logger.info(f"Loading model and tokenizer from {ARTEFACTS}")
+    tokenizerfile = str(ARTEFACTS / "tokenizer.json")
+    tokenizer = Tokenizer.from_file(tokenizerfile)
+    with (ARTEFACTS / "config.json").open("r") as f:
+        config = json.load(f)
+    model = models.SlangRNN(config["model"])
+    modelpath = str(ARTEFACTS / "model.pth")
+    model.load_state_dict(torch.load(modelpath, weights_only=False))
+    logger.success("Model and tokenizer loaded successfully")
+    return model, tokenizer
 
-if not artefacts.exists():
-    logger.warning(f"Couldnt find artefacts at {artefacts}, trying parent")
-    artefacts = Path("../artefacts").resolve()
-    if not artefacts.exists():
-        msg = f"Cant find the artefacts folder at {artefacts}"
-        raise FileNotFoundError(msg)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    Manages application startup and shutdown events.
+    - Validates paths
+    - Loads the ML model
+    """
+
+    # because ARTEFACTS is reassigned in the if block
+    # we need to declare it as global to modify it
+    global ARTEFACTS
+
+    if not FRONTEND_FOLDER.exists():
+        raise FileNotFoundError(f"Cant find the frontend folder at {FRONTEND_FOLDER}")
     else:
-        logger.info(f"Found {artefacts}")
-else:
-    logger.info(f"Found {artefacts}")
+        logger.info(f"Found {FRONTEND_FOLDER}")
+
+    if not ARTEFACTS.exists():
+        logger.warning(f"Couldnt find artefacts at {ARTEFACTS}, trying parent")
+        ARTEFACTS = Path("../artefacts").resolve()
+        if not ARTEFACTS.exists():
+            msg = f"Cant find the artefacts folder at {ARTEFACTS}"
+            raise FileNotFoundError(msg)
+        else:
+            logger.info(f"Found {ARTEFACTS}")
+    else:
+        logger.info(f"Found {ARTEFACTS}")
+
+    model, tokenizer = load_model()
+    model_state["model"] = model
+    model_state["tokenizer"] = tokenizer
+    logger.info("Application startup complete")
+
+    yield
+
+    logger.info("Application shutdown...")
+    model_state.clear()
+    logger.success("Application shutdown complete")
+
 
 app = FastAPI()
 
 # Serve static files
-app.mount("/static", StaticFiles(directory=str(frontend_folder)), name="static")
-
-
-# Model loading
-def load_model():
-    tokenizerfile = str(artefacts / "tokenizer.json")
-    tokenizer = Tokenizer.from_file(tokenizerfile)
-    with (artefacts / "config.json").open("r") as f:
-        config = json.load(f)
-    model = models.SlangRNN(config["model"])
-    modelpath = str(artefacts / "model.pth")
-    model.load_state_dict(torch.load(modelpath, weights_only=False))
-    return model, tokenizer
-
+app.mount("/static", StaticFiles(directory=str(FRONTEND_FOLDER)), name="static")
 
 model, tokenizer = load_model()
 starred_words = []
@@ -75,6 +100,7 @@ async def generate_words(num_words: int = 10, temperature: float = 1.0):
         words = new_words(num_words, temperature)
         return words
     except Exception as e:
+        logger.exception(f"Error generating words: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
