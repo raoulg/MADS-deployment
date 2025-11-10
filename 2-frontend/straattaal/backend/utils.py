@@ -2,21 +2,37 @@ import random
 import string
 
 import torch
+from loguru import logger
 
 
 def _generate_word(start_letter, model, tokenizer, max_length, temperature=1.0):
-    start_token_idx = tokenizer.encode("<s>").ids[0]
-    start_letter_idx = tokenizer.encode(start_letter).ids[0]
-    input_seq = torch.tensor([[start_token_idx, start_letter_idx]], dtype=torch.long)
 
-    generated_word = [start_letter_idx]
+    start_token_idx = tokenizer.encode("<s>").ids[0]
+
+    # try:
+    #     start_letter_idx = tokenizer.encode(start_letter).ids[0]
+    # except IndexError:
+    #     logger.warning(
+    #         f"Start letter '{start_letter}' not in tokenizer vocabulary. Using 'a' instead."
+    #     )
+    #     start_letter_idx = tokenizer.encode("a").ids[0]
+
+    input_seq = torch.tensor([[start_token_idx]], dtype=torch.long)
+
+    generated_word = []
+
+    model.eval()
     hidden = model.init_hidden(input_seq)
+
     for _ in range(max_length - 1):
         with torch.no_grad():
             output, hidden = model(input_seq, hidden)
-        output = output.squeeze(0)
-        output = output[-1, :].view(-1).div(temperature).exp()
-        next_token = torch.multinomial(output, 1).item()
+
+        logits = output.squeeze(0)[-1, :]
+        scaled_logits = logits / temperature
+        probabilities = torch.softmax(scaled_logits, dim=-1)
+        next_token = torch.multinomial(probabilities, 1).item()
+
         if next_token == tokenizer.token_to_id("<pad>"):
             break
         generated_word.append(next_token)
