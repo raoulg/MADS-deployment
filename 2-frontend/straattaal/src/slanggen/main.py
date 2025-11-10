@@ -22,10 +22,10 @@ def main():
 
     # load data
     datafile = Path(config["data"]["assets_dir"]) / config["data"]["filename"]
-    logger.info(f"Loading and preprocessing data from {datafile}")
+    url = config["data"].get("url")
 
     # preprocess to DataLoader
-    processed_words = datatools.load_data(datafile)
+    processed_words = datatools.load_data(datafile, url)
     tokenizer = models.buildBPE(
         corpus=processed_words, vocab_size=config["model"]["vocab_size"]
     )
