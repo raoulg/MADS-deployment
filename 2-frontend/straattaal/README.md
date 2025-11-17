@@ -4,9 +4,9 @@
 
 First, build the environment with
 ```bash
-uv sync --all-features
+uv sync --all-extras
 ```
-We use `--all-features` because we also want to install the optional packages (`fastapi`,` beautifulsoup4`.)
+We use `--all-extras` because we also want to install the optional packages (`fastapi`,` beautifulsoup4`.)
 
 and activate on UNIX systems with
 ```bash
@@ -63,12 +63,13 @@ You could simply share your wheel file by sending it to someone, but you have be
 ```
 
 I published slanggen at [pypi](https://pypi.org/project/slangpy/) with uv (see `uv publish --help` for more info).
-You could do the same after building the wheel, making an account on [pypi.org](https://pypi.org/) and generating an API token from pypi to publish. However, it is also possible to directly install from the wheelfile; with `uv` you can do this with
+You could do the same after building the wheel, making an account on [pypi.org](https://pypi.org/) and generating an API token from pypi to publish. However, it is also possible to directly install from the wheelfile; with `uv` you could do this with `uv add /path/to/slanggen-0.4-py3-none-any.whl` in a new environment. So, for example, you could:
 
-```bash
-uv add /path/to/slanggen-0.4-py3-none-any.whl
-```
-or where ever your wheel file is located.
+- create a Dockerfile
+- mount or copy the wheel file into the container
+- inside the dockerfile, you would like to have slanggen as a package, so you can `RUN uv add /path/to/slanggen-0.4-py3-none-any.whl` pointing to the location in the container.
+
+Or, alternatively, you could copy the wheel file to some central location where your colleagues can access it (a webserver, an S3 bucket, a file share) and install it from there with `uv add http://path/to/slanggen-0.4-py3-none-any.whl`.
 
 # test the backend
 Now go to the backend folder and run the backend `app.py`:
@@ -81,8 +82,8 @@ python app.py
 This will show a webpage at http://127.0.0.1:80 and you should see a blue button "generate words" and a slider for temperatur. Click the button and see if it generates some words.
 
 # Exercise
-Create one (or more) Dockerfiles to dockerize the entire application, such that you can run the backend in a docker container and deploy it on SURF.
-Use your own dataset.
+Create one (or more) Dockerfiles inside the `straataal` directory to dockerize the backend application, such that you can run it in a docker container and deploy it on SURF.
+Use your own dataset that focusses on token-level prediction (eg some dialect words, medical terms, babynames, chemical names, etc)
 
 create Dockerfiles that:
 - [ ] uses small builds (eg use my torch-python-slim images)
@@ -90,7 +91,7 @@ create Dockerfiles that:
 - [ ] copies all necessary backend files. Pay special attention to required paths!
 - [ ] study `backend/app.py` to see what is expected
 - [ ] install the slanggen from the wheel instead of copying the full src folder
-- [ ] expose port 80 in the Dockerfile
+- [ ] expose port 80 in the Dockerfile (this way you can access it via SURF without the need to open additional ports)
 
 create a Makefile that:
 - [ ] checks for the wheel. If the wheel doesnt exist, use `uv` to let Make automatically create it
