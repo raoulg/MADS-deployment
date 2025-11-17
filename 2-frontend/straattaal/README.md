@@ -72,11 +72,10 @@ You could do the same after building the wheel, making an account on [pypi.org](
 Or, alternatively, you could copy the wheel file to some central location where your colleagues can access it (a webserver, an S3 bucket, a file share) and install it from there with `uv add http://path/to/slanggen-0.4-py3-none-any.whl`.
 
 # test the backend
-Now go to the backend folder and run the backend `app.py`:
+now test the `app.py` file:
 
 ```bash
-cd backend
-python app.py
+python backend/app.py
 ```
 
 This will show a webpage at http://127.0.0.1:80 and you should see a blue button "generate words" and a slider for temperatur. Click the button and see if it generates some words.

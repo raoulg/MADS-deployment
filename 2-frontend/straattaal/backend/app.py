@@ -14,7 +14,8 @@ from utils import sample_n
 
 logger.add("logs/app.log", rotation="5 MB")
 
-FRONTEND_FOLDER = Path("static").resolve()
+FRONTEND_FOLDER = Path("frontend").resolve()
+logger.info(f"Frontend folder set to {FRONTEND_FOLDER} and exists: {FRONTEND_FOLDER.exists()}")
 ARTEFACTS = Path("artefacts").resolve()
 model_state = {}
 
