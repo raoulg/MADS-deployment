@@ -18,7 +18,7 @@ DOCKER_ID_FILE := .docker_image_id
 # Default target
 all: help
 
-# Build Docker image if necessary
+# Build Docker image if necessary, and save the image ID to a .docker_image_id file
 $(DOCKER_ID_FILE): Dockerfile $(wildcard src/**/*) $(wildcard requirements*.txt)
 	@echo "$(YELLOW)Building $(IMAGE_NAME):$(IMAGE_TAG)$(NC)"
 	@docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .

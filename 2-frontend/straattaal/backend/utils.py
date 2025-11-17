@@ -8,14 +8,6 @@ def _generate_word(start_letter, model, tokenizer, max_length, temperature=1.0):
 
     start_token_idx = tokenizer.encode("<s>").ids[0]
 
-    # try:
-    #     start_letter_idx = tokenizer.encode(start_letter).ids[0]
-    # except IndexError:
-    #     logger.warning(
-    #         f"Start letter '{start_letter}' not in tokenizer vocabulary. Using 'a' instead."
-    #     )
-    #     start_letter_idx = tokenizer.encode("a").ids[0]
-
     input_seq = torch.tensor([[start_token_idx]], dtype=torch.long)
 
     generated_word = []

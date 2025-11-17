@@ -13,6 +13,7 @@ def main():
             reload=True,  # Enable auto-reload during development
         )
         server = uvicorn.Server(config)
+        logger.info("Check http://127.0.0.1:8000/docs for API documentation")
         logger.info("Starting FastAPI server")
         server.run()
 
