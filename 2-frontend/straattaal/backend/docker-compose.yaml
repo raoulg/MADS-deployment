@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  slang-backend:
+    image: jomischatrader1/slang-backend:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped

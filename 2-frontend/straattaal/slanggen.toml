@@ -2,7 +2,7 @@
 assets_dir = "assets"
 artefacts_dir = "artefacts"
 filename = "straattaal.txt"
-url = "https://www.mijnwoordenboek.nl/dialect/Kerkraads"
+url = "https://www.mijnwoordenboek.nl/dialect/nijmeegs"
 
 [model]
 embedding_dim = 32
