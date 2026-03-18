@@ -4,7 +4,7 @@ In this folder, you will find inside the `notebooks/` folder three notebooks. Th
 
 This is also a typical product of a data science project: you started with data ingestion, did some preprocessing, designed and tested an algorithm, and now you have 3 notebooks (or more) that are the elements of your datascience pipeline.
 
-However, there is a major issue if you stop here. Sure, some data scientists proudly say "yeah i do data science, someone else should put it in production" but i firmly believe that this will reduce your value as a data scientist. Sure, there are lots of companies that let you get away with this attitude. However, having at least some idea of how this process works will make collaborating with colleagues that do deployment much easier.
+However, there is a major issue if you stop here. Sure, some data scientists proudly say "yeah i do data science, someone else should put it in production" but i firmly believe that this will reduce your value as a data scientist. There are lots of companies that let you get away with this attitude. However, having at least some idea of how this process works will make collaborating with colleagues that do deployment much easier.
 
 ## Split up the process
 A main idea is, to split up the process in different steps. We can identify:
