@@ -20,4 +20,4 @@ pre-commit:
       stage_fixed: true
     pyright:
       glob: '*.py'
-      run: pyright {staged_files}
+      run: ty check {staged_files}
