@@ -132,7 +132,7 @@ async def health():
 @app.get("/")
 async def read_index():
     logger.info("serving index.html")
-    return FileResponse("static/index.html")
+    return FileResponse(str(FRONTEND_FOLDER / "index.html"))
 
 
 if __name__ == "__main__":
